@@ -32,7 +32,7 @@ static const Rule rules[] = {
 	// mask = workspace -1
 	{ "firefox",  NULL,       NULL,       1 << 0,       0,           0,         0,        -1 },
 	{ "Thunderbird",  "Mail",       NULL,       1 << 6,       0,           0,         0,        -1 },
-	{ "Emacs",  "emacs",       NULL,       1 << 7,       0,           0,         0,        -1 },
+	{ "Emacs",  "emacs",       NULL,       1 << 8,       0,           0,         0,        -1 },
 	{ "okular",  "okular",       NULL,       1 << 2,       0,           0,         0,        -1 },
 	{ "St",       "ws-term",  NULL,       1 << 1,       0,           0,         0,        -1 },
 	{ "mpv",      NULL,  NULL,       1 << 7,       0,           1,         1,        -1 },
