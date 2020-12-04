@@ -21,7 +21,7 @@ static const char *colors[][3]      = {
 
 /* tagging */
 // 
-static const char *tags[] = { "", "", "", "", ":File", "", "", "", "" };
+static const char *tags[] = { "","","", "",":File", "", "","", ""};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -29,15 +29,13 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   isterminal noswallow monitor */
+	// mask = workspace -1
 	{ "firefox",  NULL,       NULL,       1 << 0,       0,           0,         0,        -1 },
-	{ "Thunderbird",  "Mail",       NULL,       1 << 8,       0,           0,         0,        -1 },
+	{ "Thunderbird",  "Mail",       NULL,       1 << 6,       0,           0,         0,        -1 },
 	{ "Emacs",  "emacs",       NULL,       1 << 7,       0,           0,         0,        -1 },
-	{ "okular",  "okular",       NULL,       1 << 1,       0,           0,         0,        -1 },
-	{ "St",       "ws-term",  NULL,       1 << 3,       0,           0,         0,        -1 },
-	{ "St",       "ws-zettle",  NULL,       1 << 3,       0,           0,         0,        -1 },
-	{ "St",       "st",  NULL,       1 << 3,       0,           1,         1,        -1 },
-	{ "Surf",       "surf",  NULL,       1 << 5,       0,           1,         1,        -1 },
-	{ "mpv",      NULL,  NULL,       1 << 6,       0,           1,         1,        -1 },
+	{ "okular",  "okular",       NULL,       1 << 2,       0,           0,         0,        -1 },
+	{ "St",       "ws-term",  NULL,       1 << 1,       0,           0,         0,        -1 },
+	{ "mpv",      NULL,  NULL,       1 << 7,       0,           1,         1,        -1 },
 };
 
 /* layout(s) */
