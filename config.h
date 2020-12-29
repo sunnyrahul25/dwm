@@ -5,7 +5,7 @@
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 0;        /* 0 means bottom bar */
+static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Input:size=10" }; static const char dmenufont[]       = "monospace:size=10"; static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -25,14 +25,12 @@ static const char *tags[] = { "","","", "",":File", "", "",
 
 static const Rule rules[] = {
 	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
+	 *	WM_CLASS(STRING) = instance, class WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   isterminal noswallow monitor */
 	// mask = workspace -1
 	{ "firefox",  NULL,       NULL,       1 << 0,       0,           0,         0,        -1 },
 	{ "Thunderbird",  "Mail",       NULL,       1 << 6,       0,           0,         0,        -1 },
-	{ "Emacs",  "emacs",       NULL,       1 << 8,       0,           0,         0,        -1 },
 	{ "okular",  "okular",       NULL,       1 << 2,       0,           0,         0,        -1 },
 	{ "St",       "ws-term",  NULL,       1 << 1,       0,           0,         0,        -1 },
 	{ "mpv",      NULL,  NULL,       1 << 7,       0,           1,         1,        -1 },
@@ -64,7 +62,9 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run_history", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *roficmd[] = { "rofi", "-show", "drun","-monitor","0","-show-icons", NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = {  "st", NULL };
+static const char *capturecmd[]  = {  "emacsclient","-n","-e","(yequake-toggle \"org-capture\")",NULL };
+//emacsclient -n -e '(yequake-toggle "org-capture")'
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34","-e","zsh",NULL };
 //st -t "scratchpad" -g "120x34" -e sh -c 'tmux attach -t scratchpad;sh'
@@ -73,7 +73,7 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	// Dmenu specifier
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = capturecmd } },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
