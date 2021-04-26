@@ -32,14 +32,14 @@ static const Rule rules[] = {
 	{ "firefox",  NULL,       NULL,       1 << 0,       0,           0,         0,        -1 },
 	{ "Thunderbird",  "Mail",       NULL,       1 << 6,       0,           0,         0,        -1 },
 	{ "okular",  "okular",       NULL,       1 << 2,       0,           0,         0,        -1 },
-	{ "St",       "ws-term",  NULL,       1 << 1,       0,           0,         0,        -1 },
+	{ "St",       "ws-term",  NULL,       1 << 1,       0,           0,         1,        -1 },
 	{ "mpv",      NULL,  NULL,       1 << 7,       0,           1,         1,        -1 },
 };
 
 /* layout(s) */
 static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -60,7 +60,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run_history", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *roficmd[] = { "rofi", "-show", "drun","-monitor","0","-show-icons", NULL };
 static const char *termcmd[]  = {  "st", NULL };
 static const char *capturecmd[]  = {  "emacsclient","-n","-e","(yequake-toggle \"org-capture\")",NULL };
