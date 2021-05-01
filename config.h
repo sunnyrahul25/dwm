@@ -33,6 +33,7 @@ static const Rule rules[] = {
 	{ "Thunderbird",  "Mail",       NULL,       1 << 6,       0,           0,         0,        -1 },
 	{ "okular",  "okular",       NULL,       1 << 2,       0,           0,         0,        -1 },
 	{ "St",       "ws-term",  NULL,       1 << 1,       0,           0,         1,        -1 },
+	{ "Emacs",       NULL,  NULL,       0,       1,           0,         1,        -1 },
 	{ "mpv",      NULL,  NULL,       1 << 7,       0,           1,         1,        -1 },
 };
 
@@ -68,13 +69,14 @@ static const char *capturecmd[]  = {  "emacsclient","-n","-e","(yequake-toggle \
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34","-e","zsh",NULL };
 //st -t "scratchpad" -g "120x34" -e sh -c 'tmux attach -t scratchpad;sh'
-
+static const char *agendacommand[]  = {"tdrop","-ma", "-w", "80%", "-h", "80%", "-x", "25%", "-y", "25%", "-f", "'c'", "emacs",NULL};
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	// Dmenu specifier
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = capturecmd } },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
+	{ MODKEY,                       XK_o,      spawn,  				 {.v = agendacommand } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
