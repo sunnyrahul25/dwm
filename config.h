@@ -32,9 +32,9 @@ static const Rule rules[] = {
 	{ "firefox",  NULL,       NULL,       1 << 0,       0,           0,         0,        -1 },
 	{ "Thunderbird",  "Mail",       NULL,       1 << 6,       0,           0,         0,        -1 },
 	{ "okular",  "okular",       NULL,       1 << 2,       0,           0,         0,        -1 },
-	{ "St",       "ws-term",  NULL,       1 << 1,       0,           0,         1,        -1 },
+	{ "st",       NULL,  NULL,       0,       0,           1,         1,        -1 },
 	{ "Emacs",       NULL,  NULL,       0,       1,           0,         1,        -1 },
-	{ "mpv",      NULL,  NULL,       1 << 7,       0,           1,         1,        -1 },
+	{ "Alacritty",       NULL,  "floating",       0,       1,           1,         -1,        -1 },
 };
 
 /* layout(s) */
@@ -56,6 +56,7 @@ static const Layout layouts[] = {
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
+#define CMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
@@ -67,9 +68,11 @@ static const char *termcmd[]  = {  "st", NULL };
 static const char *capturecmd[]  = {  "emacsclient","-n","-e","(yequake-toggle \"org-capture\")",NULL };
 //emacsclient -n -e '(yequake-toggle "org-capture")'
 static const char scratchpadname[] = "scratchpad";
-static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34","-e","zsh",NULL };
+static const char *scratchpadcmd[] = {"tdrop","-ma", "-w", "80%", "-h", "80%", "-x", "25%", "-y", "25%","-n","scratchpad", "-f", "'-t floating'", "alacritty",NULL};
 //st -t "scratchpad" -g "120x34" -e sh -c 'tmux attach -t scratchpad;sh'
 static const char *agendacommand[]  = {"tdrop","-ma", "-w", "80%", "-h", "80%", "-x", "25%", "-y", "25%", "-f", "'c'", "emacs",NULL};
+static const char *mpvcommand[]  = {"tdrop","-ma", "-w", "80%", "-h", "80%", "-x", "25%", "-y", "25%","-n","mpv", "-f", "'-t floating'", "alacritty",NULL};
+static const char *passcommand[]  = {"tdrop","-ma", "-w", "80%", "-h", "80%", "-x", "25%", "-y", "25%","-n","mpv", "-f", "'-t floating'", "alacritty",NULL};
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	// Dmenu specifier
@@ -77,6 +80,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = capturecmd } },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_o,      spawn,  				 {.v = agendacommand } },
+	//{ MODKEY,                       XK_p,      spawn,  				 {.v = mpvcommand } },
+	{ MODKEY,                       XK_p,      spawn,  				 CMD("passmenu") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
